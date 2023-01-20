@@ -16,11 +16,6 @@
                         Tambah
                         Area</a>
                 </div>
-                {{-- <div class="col-md-auto px-1">
-                    <a href="/dashboard/areas/hidden" class="btn btn-warning"><span><i
-                                class="fa-solid fa-eye-slash"></i></span>
-                        Hidden Area</a>
-                </div> --}}
             </div>
         </div>
         <div class="card-body">

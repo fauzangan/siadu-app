@@ -138,4 +138,19 @@ class DashboardAsetController extends Controller
             'asets' => Aset::where('bit_active', 0)->get()
         ]);
     }
+
+    public function hidden(Request $request, $id){
+        $rules = [
+            'bit_active' => ['required'] 
+        ];
+
+        $validatedData = $request->validate($rules);
+        Aset::where('id_aset', $id)->update($validatedData);
+        // $asets = Aset::where('id_area', $id)->get();
+        // foreach($asets as $aset){
+        //     $aset->bit_active = 0;
+        //     $aset->save();
+        // }
+        return redirect()->back();
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardAdministratorController;
 use App\Http\Controllers\DashboardAreaController;
 use App\Http\Controllers\DashboardAsetController;
 use App\Http\Controllers\DashboardGolonganController;
@@ -45,4 +46,8 @@ Route::get('/dashboard/golongan-8', [DashboardGolonganController::class, 'showGo
 
 # Dashboard Aset Controller
 Route::get('/dashboard/asets/hidden', [DashboardAsetController::class, 'showHidden']);
+Route::put('/dashboard/asets/hidden/{aset}', [DashboardAsetController::class, 'hidden']);
 Route::resource('/dashboard/asets', DashboardAsetController::class);
+
+# Dashboard Administrator Controller
+Route::resource('/dashboard/administrators', DashboardAdministratorController::class)->middleware('auth');

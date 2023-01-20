@@ -34,7 +34,7 @@
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Superadmin</div>
-                <a class="nav-link" href="#">
+                <a class="nav-link {{ Request::is('dashboard/administrators*')? 'active' : '' }}" href="/dashboard/administrators">
                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                     Administrator
                 </a>
