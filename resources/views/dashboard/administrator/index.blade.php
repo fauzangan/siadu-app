@@ -12,12 +12,12 @@
                     Administrator
                 </div>
                 <div class="col-md-auto px-1">
-                    <a href="/dashboard/areas/create" class="btn btn-success"><span><i class="fa-solid fa-plus"></i></span>
+                    <a href="/dashboard/administrators/create" class="btn btn-success"><span><i class="fa-solid fa-plus"></i></span>
                         Tambah
                         Administrator</a>
                 </div>
                 <div class="col-md-auto px-1">
-                    <a href="" class="btn btn-danger"><span><i
+                    <a href="/dashboard/administrators/deactive" class="btn btn-danger"><span><i
                                 class="fa-solid fa-eye-slash"></i></span>
                         Deactivated</a>
                 </div>
@@ -42,11 +42,10 @@
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <form action="" method="POST"
-                                class="d-inline">
+                            <form action="/dashboard/administrators/{{ $user->id }}" method="POST" class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button class="badge bg-danger border-0"
+                                <button class="btn btn-danger border-0"
                                     onclick="return confirm('Are You Sure?')">Deactive</button>
                             </form>
                         </td>

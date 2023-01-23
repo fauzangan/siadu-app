@@ -62,6 +62,10 @@ class DashboardAsetController extends Controller
         if($request['keteranga']==null){
             $validatedData['keterangan'] = '-';
         }
+
+        if($request->file('gambar')) {
+            $validatedData['gambar'] = $request->file('gambar')->store('aset-images');
+        }
         Aset::create($validatedData);
         return redirect('/dashboard/asets')->with('success','Area baru telah ditambahkan!');
     }

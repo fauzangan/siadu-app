@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class DashboardAdministratorController extends Controller
@@ -26,7 +27,7 @@ class DashboardAdministratorController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.administrator.create');
     }
 
     /**
@@ -37,7 +38,16 @@ class DashboardAdministratorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required','max:255'],
+            'username' => ['required','min:5','max:255','unique:users'],
+            'email' => ['required','email:dns','unique:users'],
+            'password' => ['required','min:5','max:255']
+        ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        User::create($validatedData);
+        return redirect('/dashboard/administrators')->with('success','New Admin has been added');
     }
 
     /**
@@ -80,8 +90,23 @@ class DashboardAdministratorController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($userId)
     {
-        //
+        User::where('id', $userId)->delete();
+        return redirect('/dashboard/administrators')->with('success', 'Admin has been deleted');
     }
+
+    public function showDeactive(){
+        return view('dashboard.administrator.deactive', [
+            'users' => User::onlyTrashed()->get()
+        ]);
+    }
+
+    public function restore($userId)
+    {
+        User::onlyTrashed()->find($userId)->restore();
+        return redirect('/dashboard/administrators/deactive')->with('success', 'Admin has been restored');
+    }
+
+    
 }

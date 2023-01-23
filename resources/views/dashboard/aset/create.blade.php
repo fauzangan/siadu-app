@@ -65,11 +65,18 @@
                     <label for="bahan" class="form-label">Bahan</label>
                     <input type="text" class="form-control" id="bahan" name="bahan">
                 </div>
-                <div class="mb-4">
-                    <label for="gambar" class="form-label">Gambar</label>
-                    <input class="form-control" type="file" id="gambar" name="gambar" accept=".jpg,.jpeg,.png" >
-                    <div id="gambarHelp" class="form-text">Format: JPEG, JPG & PNG</div>
+
+            <div class="mb-3">
+              <label for="gambar" class="form-label">Course Image</label>
+              <img alt="" class="img-preview img-fluid mb-3 col-sm-5">
+              <input class="form-control @error('gambar') is-invalid @enderror" type="file" id="gambar" name="gambar" onchange="previewImage()">
+              @error('gambar')
+                <div class="invalid-feedback">
+                    {{ $message }}
                 </div>
+                @enderror
+            </div>
+
                 <div class="row mb-4">
                     <label for="tanggal_pembelian" class="col-3 form-label">Tanggal Pembelian</label>
                     <div class="col-5">
@@ -124,4 +131,23 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // document.addEventListener('trix-file-accept', function e){
+        //     e.preventDefault();
+        // }
+        function previewImage(){
+          const image = document.querySelector('#gambar');
+          const imgPreview = document.querySelector('.img-preview');
+    
+          imgPreview.style.display = 'block';
+    
+          const oFReader = new FileReader();
+          oFReader.readAsDataURL(image.files[0]);
+    
+          oFReader.onload = function(oFREvent){
+            imgPreview.src = oFREvent.target.result;
+          }
+        }
+    </script>
 @endsection

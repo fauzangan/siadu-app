@@ -61,7 +61,9 @@
                                     {{-- <a href="#" class="badge bg-info"><span class="fas fa-eye"></span></a> --}}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="badge bg-info border-0" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"><i class="fas fa-eye"></i></button>
+                                        data-bs-target="#exampleModal{{ $aset->id_aset }}"><i class="fas fa-eye"></i></button>
+                                    {{-- Modal --}}
+                                    @include('dashboard.aset.modal')
                                 </td>
                                 <td>{{ $aset->tanggal_pembelian }}</td>
                                 <td>{{ $aset->kode_barang }}</td>
@@ -89,24 +91,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     {{-- Data Tables --}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>

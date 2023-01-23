@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardAreaController;
 use App\Http\Controllers\DashboardAsetController;
 use App\Http\Controllers\DashboardGolonganController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,25 +30,29 @@ Route::get('/dashboard', function(){
 })->middleware('auth');
 
 # Dashboard Area Controller
-Route::get('/dashboard/areas/hidden', [DashboardAreaController::class, 'showHidden']);
-Route::put('/dashboard/areas/hidden/{area}', [DashboardAreaController::class, 'hidden']);
-Route::put('/dashboard/areas/restore/{area}', [DashboardAreaController::class, 'restore']);
-Route::resource('/dashboard/areas', DashboardAreaController::class);
+Route::get('/dashboard/areas/hidden', [DashboardAreaController::class, 'showHidden'])->middleware('auth');
+Route::put('/dashboard/areas/hidden/{area}', [DashboardAreaController::class, 'hidden'])->middleware('auth');
+Route::put('/dashboard/areas/restore/{area}', [DashboardAreaController::class, 'restore'])->middleware('auth');
+Route::resource('/dashboard/areas', DashboardAreaController::class)->middleware('auth');
 
 # Dashboard Golongan Controller
-Route::get('/dashboard/golongan-1', [DashboardGolonganController::class, 'showGolongan1']);
-Route::get('/dashboard/golongan-2', [DashboardGolonganController::class, 'showGolongan2']);
-Route::get('/dashboard/golongan-3', [DashboardGolonganController::class, 'showGolongan3']);
-Route::get('/dashboard/golongan-4', [DashboardGolonganController::class, 'showGolongan4']);
-Route::get('/dashboard/golongan-5', [DashboardGolonganController::class, 'showGolongan5']);
-Route::get('/dashboard/golongan-6', [DashboardGolonganController::class, 'showGolongan6']);
-Route::get('/dashboard/golongan-7', [DashboardGolonganController::class, 'showGolongan7']);
-Route::get('/dashboard/golongan-8', [DashboardGolonganController::class, 'showGolongan8']);
+Route::get('/dashboard/golongan-1', [DashboardGolonganController::class, 'showGolongan1'])->middleware('auth');
+Route::get('/dashboard/golongan-2', [DashboardGolonganController::class, 'showGolongan2'])->middleware('auth');
+Route::get('/dashboard/golongan-3', [DashboardGolonganController::class, 'showGolongan3'])->middleware('auth');
+Route::get('/dashboard/golongan-4', [DashboardGolonganController::class, 'showGolongan4'])->middleware('auth');
+Route::get('/dashboard/golongan-5', [DashboardGolonganController::class, 'showGolongan5'])->middleware('auth');
+Route::get('/dashboard/golongan-6', [DashboardGolonganController::class, 'showGolongan6'])->middleware('auth');
+Route::get('/dashboard/golongan-7', [DashboardGolonganController::class, 'showGolongan7'])->middleware('auth');
+Route::get('/dashboard/golongan-8', [DashboardGolonganController::class, 'showGolongan8'])->middleware('auth');
 
 # Dashboard Aset Controller
-Route::get('/dashboard/asets/hidden', [DashboardAsetController::class, 'showHidden']);
-Route::put('/dashboard/asets/hidden/{aset}', [DashboardAsetController::class, 'hidden']);
-Route::resource('/dashboard/asets', DashboardAsetController::class);
+Route::get('/dashboard/asets/hidden', [DashboardAsetController::class, 'showHidden'])->middleware('auth');
+Route::put('/dashboard/asets/hidden/{aset}', [DashboardAsetController::class, 'hidden'])->middleware('auth');
+Route::resource('/dashboard/asets', DashboardAsetController::class)->middleware('auth');
 
 # Dashboard Administrator Controller
-Route::resource('/dashboard/administrators', DashboardAdministratorController::class)->middleware('auth');
+Route::get('/dashboard/administrators/deactive', [DashboardAdministratorController::class, 'showDeactive'])->middleware('auth');
+Route::post('/dashboard/administrators/restore/{user}', [DashboardAdministratorController::class, 'restore'])->middleware('auth');
+Route::resource('/dashboard/administrators', DashboardAdministratorController::class)->middleware('auth')->middleware('auth');
+
+// Route::get('/linkstorage', function(){Artisan::call('storage:link');});
